@@ -1,10 +1,11 @@
-﻿@model Bookish.MVCWeb.Models.BookModel
+﻿@model Bookish.MVCWeb.Models.CheckoutModel
 @{
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-
-    <p>IT WORKS</p>
-
+<div>
+    @foreach(var item in Model.Checkouts)
+    {
+    <p>@item.ToString()</p>
+    }
 </div>

@@ -1,13 +1,8 @@
 ﻿using Bookish.DataAccess;
 using Bookish.MVCWeb.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bookish.MVCWeb.Controllers
 {
@@ -22,14 +17,15 @@ namespace Bookish.MVCWeb.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated) { Redirect("./Views/Home/Dashboard.cshtml"); }
-            BookModel bookModel = new BookModel(Book.GetAllBooks());
+            if (User.Identity.IsAuthenticated) { return Redirect("/Home/Dashboard"); }
+            BookModel bookModel = new BookModel(BookRepo.GetAllBooks());
             return View(bookModel);
         }
 
         public IActionResult Dashboard()
         {
-            return View();
+            CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
+            return View(checkoutModel);
         }
 
         public IActionResult Privacy()

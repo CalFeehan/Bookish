@@ -1,0 +1,11 @@
+﻿@model Bookish.MVCWeb.Models.BookModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @foreach(var item in Model.Books)
+            {
+                <p>@item.ToString()</p>
+            }
+</div>

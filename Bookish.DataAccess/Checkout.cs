@@ -13,21 +13,8 @@ namespace Bookish.DataAccess
         public int BookId { get; }
         public DateTime DueDate { get; init; }
 
-        public static List<Checkout> GetAllCheckouts()
-        {
-            IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+        public static List<Checkout> GetAllCheckouts() => DatabaseObject.ExecuteGetQuery<Checkout>("SELECT * FROM Checkouts");
 
-            string SqlString = "SELECT * FROM Checkouts";
-
-            List<Checkout> checkoutList = (List<Checkout>)db.Query<Checkout>(SqlString);
-
-            db.Close();
-
-            return checkoutList;
-        }
-
-        public override string ToString() {
-            return $"Book {BookId} checkout out by user {UserId}, due back {DueDate.ToShortDateString()}";
-        }
+        public override string ToString() => $"Book {BookId} checkout out by user {UserId}, due back {DueDate.ToShortDateString()}";
     }
 }

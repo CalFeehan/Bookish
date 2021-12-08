@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookish.ConsoleApp", "Booki
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookish.DataAccess", "Bookish.DataAccess\Bookish.DataAccess.csproj", "{A498783D-6B22-40EF-96B3-F9431BE87B3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookish.MVCWeb", "Bookish.MVCWeb\Bookish.MVCWeb.csproj", "{4E56BF49-FCEC-443B-A43F-FA1DAC8799A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookish.MVCWeb", "Bookish.MVCWeb\Bookish.MVCWeb.csproj", "{4E56BF49-FCEC-443B-A43F-FA1DAC8799A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

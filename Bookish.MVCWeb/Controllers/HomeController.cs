@@ -1,5 +1,6 @@
 ﻿using Bookish.DataAccess;
 using Bookish.MVCWeb.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,8 +22,14 @@ namespace Bookish.MVCWeb.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated) { Redirect("./Views/Home/Dashboard.cshtml"); }
             BookModel bookModel = new BookModel(Book.GetAllBooks());
             return View(bookModel);
+        }
+
+        public IActionResult Dashboard()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

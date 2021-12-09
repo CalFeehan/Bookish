@@ -23,7 +23,6 @@ namespace Bookish.DataAccess
 
         public static void ExecutePostQuery(string query)
         {
-
             IDbConnection db = new SqlConnection("Server=localhost;Database=bookish;Trusted_Connection=True;MultipleActiveResultSets=true");
 
             db.Query(query);

@@ -14,6 +14,8 @@ namespace Bookish.ConsoleApp
                 Console.WriteLine(new string('*', 20));
             }
 
+            // BookRepo.AddBook("The Elements of Style", " William Strunk Jr.,  E. B. White,  William Strunk", "020530902X", "http://covers.openlibrary.org/b/id/6716028-M.jpg");
+
             foreach (Book book in BookRepo.GetAllBooks())
             {
                 Console.WriteLine(new string('*', 20));
@@ -32,8 +34,6 @@ namespace Bookish.ConsoleApp
             {
                 Console.WriteLine(checkout);
             }
-
-
 
         }
     }

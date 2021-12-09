@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Bookish.DataAccess
 {
@@ -10,6 +11,8 @@ namespace Bookish.DataAccess
         public static List<Book> GetBooksByAuthor(string author) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Author=\'{author}\'");
 
         public static List<Book> GetBooksByTitle(string title) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Title=\'{title}\'");
+
+        public static Book GetBookByID(int bookId) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE BookId={bookId}")[0];
 
         public static List<Book> GetBooksByISBN(string ISBN) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE ISBN=\'{ISBN}\'");
 

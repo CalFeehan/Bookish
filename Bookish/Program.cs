@@ -35,6 +35,9 @@ namespace Bookish.ConsoleApp
                 Console.WriteLine(checkout);
             }
 
+            // Run CSV import
+            // Utility.AddCSVLineToBookDatabase(Utility.ExtractFromCSV(@"C:\Users\User\Desktop\amended_books.csv", true));
+
         }
     }
 }

@@ -4,6 +4,6 @@ namespace Bookish.DataAccess
 {
     public class UserRepo
     {
-        public static List<User> GetAllUsers() => DatabaseObject.ExecuteGetQuery<User>("SELECT TOP 100 [Id],[Username] FROM [Users]");
+        public static List<User> GetAllUsers() => DatabaseObject.ExecuteGetQuery<User>("SELECT TOP 100 [Id],[UserName] FROM [AspNetUsers]");
     }
 }

@@ -9,10 +9,9 @@ namespace Bookish.DataAccess
 {
     public class User
     {
-        public int UserId { get; }
-        public string Username { get; set; }
-        public int IsActive { get; set; }
+        public string Id { get; }
+        public string UserName { get; set; }
         
-        public override string ToString() => $"UserId: {UserId}, Username: {Username}, IsActive: {IsActive}";
+        public override string ToString() => $"Id: {Id}, UserName: {UserName}.";
     }
 }

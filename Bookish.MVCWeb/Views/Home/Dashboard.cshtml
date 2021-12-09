@@ -4,8 +4,12 @@
 }
 
 <div>
+    <h1>Your Checked Out Books:</h1>
+
+
     @foreach(var item in Model.Checkouts)
     {
     <p>@item.ToString()</p>
+
     }
 </div>

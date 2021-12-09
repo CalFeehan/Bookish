@@ -7,12 +7,12 @@ namespace Bookish.ConsoleApp
     {
         static void Main(string[] args)
         {
-            //foreach (User user in UserRepo.GetAllUsers())
-            //{
-            //    Console.WriteLine(new string('*', 20));
-            //    Console.WriteLine(user);
-            //    Console.WriteLine(new string('*', 20));
-            //}
+            foreach (User user in UserRepo.GetAllUsers())
+            {
+                Console.WriteLine(new string('*', 20));
+                Console.WriteLine(user);
+                Console.WriteLine(new string('*', 20));
+            }
 
             foreach (Book book in BookRepo.GetAllBooks())
             {
@@ -32,6 +32,9 @@ namespace Bookish.ConsoleApp
             {
                 Console.WriteLine(checkout);
             }
+
+
+
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bookish.MVCWeb</title>
+    @RenderSection("Stylesheets")
+</head>
+<body>
+    <div class="t2-page-container">
+
+        <div class="t2-navbar">
+            <a asp-area="Identity" asp-page="/Account/Manage/Index"><img class="t2-nav-button" src="~/assets/user.png"/></a>
+            <a href="@Url.Action("Dashboard", "Home")"><img class="t2-nav-button" src="~/assets/home.png" /></a>
+            <a><img class="t2-nav-button" src="~/assets/book.png" /></a>
+            <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"><img class="t2-nav-button" src="~/assets/logout.png" /></a>
+        </div>
+
+        <div class="main-content-container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+
+    </div>
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

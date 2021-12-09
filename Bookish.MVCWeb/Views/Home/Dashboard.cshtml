@@ -1,15 +1,21 @@
-﻿@model Bookish.MVCWeb.Models.CheckoutModel
+﻿
+@model Bookish.MVCWeb.Models.CheckoutModel
 @{
     ViewData["Title"] = "Dashboard";
 }
 
+@section Stylesheets {
+    <link href="~/css/t2navbar.css" rel="stylesheet" />
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+}
+
 <div>
-    <h1>Your Checked Out Books:</h1>
-
-
-    @foreach(var item in Model.Checkouts)
+    
+    DASHBOARD CONTENT
+    @*@foreach (var item in Model.Checkouts)
     {
-    <p>@item.ToString()</p>
+        <p>@item.ToString()</p>
 
-    }
+    }*@
+
 </div>

@@ -12,7 +12,7 @@ namespace Bookish.DataAccess
     {
         public static List<T> ExecuteGetQuery<T>(string query)
         {
-            IDbConnection db = new SqlConnection("Server=localhost;Database=bookish;Trusted_Connection=True;MultipleActiveResultSets=true");
+            IDbConnection db = GetDbConnection();
 
             List<T> ret = db.Query<T>(query).ToList();
             
@@ -23,7 +23,7 @@ namespace Bookish.DataAccess
 
         public static void ExecutePostQuery(string query)
         {
-            IDbConnection db = new SqlConnection("Server=localhost;Database=bookish;Trusted_Connection=True;MultipleActiveResultSets=true");
+            IDbConnection db = GetDbConnection();
 
             db.Query(query);
 

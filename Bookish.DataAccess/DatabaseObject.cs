@@ -29,5 +29,10 @@ namespace Bookish.DataAccess
 
             db.Close();
         }
+
+        public static SqlConnection GetDbConnection()
+        {
+            return new SqlConnection("Server=localhost;Database=bookish;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
     }
 }

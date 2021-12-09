@@ -34,10 +34,10 @@ namespace Bookish.ConsoleApp
 
                 try
                 {
-                    string title = item[0];
-                    string author = item[1];
-                    string isbn = item[2];
-                    string coverPhotoUrl = item.Count < 4 ? "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" : item[3];
+                    string title = item[0].Trim();
+                    string author = item[1].Trim();
+                    string isbn = item[2].Trim();
+                    string coverPhotoUrl = item.Count < 4 ? "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" : item[3].Trim();
 
                     BookRepo.AddBook(title, author, isbn, coverPhotoUrl);
                 }

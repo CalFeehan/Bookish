@@ -33,7 +33,7 @@ namespace Bookish.ConsoleApp
                 Console.WriteLine(checkout);
             }
 
-
+            
 
         }
     }

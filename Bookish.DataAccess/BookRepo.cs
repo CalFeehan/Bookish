@@ -11,11 +11,17 @@ namespace Bookish.DataAccess
 
         public static List<Book> GetBooksByTitle(string title) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Title={title}");
 
+        public static List<Book> GetBooksByISBN(string ISBN) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE ISBN={ISBN}");
+
         // INSERT
-        public static void AddNewBook(string title, string author, int numberOfCopies, int numberOfCopiesAvailable, string ISBN, string CoverPhotoUrl)
+        public static void AddNewBook(string title, string author, string ISBN, string CoverPhotoUrl)
         {
-            DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Title={title}");
+            DatabaseObject.ExecuteGetQuery<Book>($"INSERT INTO Books VALUES ({title}, {author}, {1}, {1}, {ISBN}, {CoverPhotoUrl})");
         }
-        
+
+        public static void AddCopyOfExistingBook(string ISBN)
+        {
+            DatabaseObject.ExecutePostQuery($"UPDATE Books SET NumberOfCopies = NumberOfCopies + 1, NumberOfCopiesAvailable = NumberOfCopiesAvailable + 1, WHERE ISBN={ISBN}");
+        }
     }
 }

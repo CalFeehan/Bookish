@@ -21,13 +21,13 @@ namespace Bookish.DataAccess
             return ret;
         }
 
-        public static void ExecutePostQuery<T>(string query)
+        public static void ExecutePostQuery(string query)
         {
             //Test before use
 
-            IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            IDbConnection db = new SqlConnection("Server=localhost;Database=bookish;Trusted_Connection=True;MultipleActiveResultSets=true");
 
-            db.Query<T>(query);
+            db.Query(query);
 
             db.Close();
         }

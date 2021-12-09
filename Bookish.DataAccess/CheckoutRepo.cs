@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
+using Dapper;
 
 namespace Bookish.DataAccess
 {
@@ -7,5 +12,23 @@ namespace Bookish.DataAccess
         public static List<Checkout> GetAllCheckouts() => DatabaseObject.ExecuteGetQuery<Checkout>("SELECT * FROM Checkouts");
 
         public static List<Checkout> GetUserCheckouts(string UserName) => DatabaseObject.ExecuteGetQuery<Checkout>($"SELECT * FROM Checkouts WHERE UserName=\'{UserName}\'");
+
+        public static bool AddCheckout(string username, int bookId)
+        {
+            SqlConnection db = DatabaseObject.GetDbConnection();
+            int copiesAvailable = ((List<int>) db.Query<int>($"SELECT NumberOfCopiesAvailable FROM Books WHERE BookId={bookId}"))[0];
+            bool notCheckedOut = ((List<Checkout>) db.Query<Checkout>($"SELECT * FROM Checkouts WHERE UserName=\'{username}\' AND BookId=\'{bookId}\'")).Count == 0;
+            bool success = false;
+            if (copiesAvailable > 0 & notCheckedOut)
+            {
+                DateTime dueDate = DateTime.Now.AddDays(10);
+                string dueDateStr = dueDate.Year.ToString() + dueDate.Month.ToString() + dueDate.Day.ToString();
+                db.Query($"INSERT INTO Checkouts VALUES (\'{username}\', \'{bookId}\', \'{dueDateStr}\')");
+                db.Query($"UPDATE Books SET NumberOfCopiesAvailable = NumberOfCopiesAvailable - 1 FROM Books WHERE BookId={bookId}");
+                success = true;
+            }
+            db.Close();
+            return success;
+        }
     }
 }

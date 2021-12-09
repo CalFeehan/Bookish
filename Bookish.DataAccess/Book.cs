@@ -14,14 +14,6 @@ namespace Bookish.DataAccess
 
         public override string ToString() => $"BookId: {BookId}, Title: {Title}, Author: {Author}";
 
-        public static void AddBook(string title, string author, string ISBN, string CoverPhotoUrl)
-        {
-            if (BookRepo.GetBooksByISBN(ISBN) != null)
-            {
-                BookRepo.AddCopyOfExistingBook(ISBN);
-                return;
-            }
-            BookRepo.AddNewBook(title, author, ISBN, CoverPhotoUrl);
-        }
+        
     }
 }

@@ -23,5 +23,16 @@ namespace Bookish.DataAccess
         {
             DatabaseObject.ExecutePostQuery($"UPDATE Books SET NumberOfCopies = NumberOfCopies + 1, NumberOfCopiesAvailable = NumberOfCopiesAvailable + 1, WHERE ISBN={ISBN}");
         }
+
+        // METHODS
+        public static void AddBook(string title, string author, string ISBN, string CoverPhotoUrl)
+        {
+            if (GetBooksByISBN(ISBN) != null)
+            {
+                AddCopyOfExistingBook(ISBN);
+                return;
+            }
+            AddNewBook(title, author, ISBN, CoverPhotoUrl);
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
+using System.Linq;
 using Dapper;
 
 namespace Bookish.DataAccess
@@ -31,6 +31,11 @@ namespace Bookish.DataAccess
             return success;
         }
 
+        public static List<DateTime> GetDueDates(int bookId)
+        {
+            List<Checkout> checkouts = DatabaseObject.ExecuteGetQuery<Checkout>($"SELECT * FROM Checkouts WHERE BookId={bookId}");
+            return checkouts.Select(x => x.DueDate).ToList();
+  
         public static bool RemoveCheckout(string username, int bookId)
         {
             SqlConnection db = DatabaseObject.GetDbConnection();

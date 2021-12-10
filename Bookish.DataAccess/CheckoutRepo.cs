@@ -35,6 +35,20 @@ namespace Bookish.DataAccess
         {
             List<Checkout> checkouts = DatabaseObject.ExecuteGetQuery<Checkout>($"SELECT * FROM Checkouts WHERE BookId={bookId}");
             return checkouts.Select(x => x.DueDate).ToList();
+  
+        public static bool RemoveCheckout(string username, int bookId)
+        {
+            SqlConnection db = DatabaseObject.GetDbConnection();
+            bool isCheckedOut = ((List<Checkout>)db.Query<Checkout>($"SELECT * FROM Checkouts WHERE UserName=\'{username}\' AND BookId=\'{bookId}\'")).Count >= 1;
+            bool success = false;
+            if(isCheckedOut)
+            {
+                db.Query($"DELETE FROM Checkouts WHERE UserName=\'{username}\' AND BookId=\'{bookId}\'");
+                db.Query($"UPDATE Books SET NumberOfCopiesAvailable = NumberOfCopiesAvailable - 1 FROM Books WHERE BookId={bookId}");
+                success = true;
+            }
+            db.Close();
+            return success;
         }
     }
 }

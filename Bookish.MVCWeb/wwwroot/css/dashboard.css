@@ -1,5 +1,5 @@
-*{
-    color: rgb(255,255,255);
+* {
+    color: #232F34;
 }
 
 .background {
@@ -9,6 +9,46 @@
     z-index: -1;
     top: 0px;
     left: 0px;
+    background: rgb(220 220 220);
+}
+
+.t2-book-info-panel {
+    background: #232F34;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20rem;
+    height: 100%;
+    box-shadow: 2px 2px 50px black;
+    overflow: hidden;
+    transform: translateX(-100%);
+    transition: all 0.5s ease;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.t2-book-info-panel-active {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+.t2-book-info-panel-top {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.t2-book-info-panel-button {
+    background: none !important;
+    border: none !important;
+    height: 50px;
+    width: 50px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.t2-book-info-panel-close {
+    width: 50px;
 }
 
 .t2-dashboard-container {
@@ -18,11 +58,11 @@
 
 .t2-search-container {
     height: 75px;
-    padding: 20px;
+    padding: 20px 0px 0px 20px;    
 }
 
 .t2-search-bar {
-    border: 1px solid black;
+    border: 1px solid #232F34;
     border-radius: 5px;
     width: 25vw;
     height: 30px;
@@ -33,6 +73,7 @@
     height: 30px;
     width: 30px;
     margin-left: 10px;
+    border: 1px solid #232F34;
 }
 
 .t2-book-row {
@@ -64,3 +105,4 @@
         width: 90%;
     }
 }
+

@@ -9,8 +9,17 @@
     <link href="~/css/dashboard.css" rel="stylesheet" />
 }
 
+
+@{bool infoPanelStatus = false;}
+@{string className = infoPanelStatus ? "t2-book-info-panel-active" : "";}
+<div class="t2-book-info-panel @className" id="info-panel">
+    <div class="t2-book-info-panel-top">
+        <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
+    </div>
+</div>
 <div class="t2-dashboard-container">
-    <img class="background" src="/assets/background3.jpg" />
+
+    <img class="background" @*src="/assets/background3.jpg"*@/> 
     <div class="t2-search-container">
         <form>
             <input class="t2-search-bar" type="text" placeholder="Author" />
@@ -21,21 +30,35 @@
 
     @for (int i = 0; i < Model.Books.Count; i += 2)
     {
-    <div class="t2-book-row">
-        <div class="t2-book-container">
-            <a><img class="t2-book-cover" src="@Model.Books[i].CoverPhotoUrl" /> </a>
-            <p>@Model.Books[i].Title, @Model.Books[i].Author</p>
+        <div class="t2-book-row">
+            <div class="t2-book-container" onclick="openPanel()">
+                <a><img class="t2-book-cover" src="@Model.Books[i].CoverPhotoUrl" /> </a>
+                <p>@Model.Books[i].Title, @Model.Books[i].Author</p>
+            </div>
+
+            @if (i + 1 < Model.Books.Count)
+            {
+                <div class="t2-book-container" onclick="openPanel()">
+                    <a><img class="t2-book-cover" src="@Model.Books[i+1].CoverPhotoUrl" /> </a>
+                    <p>@Model.Books[i + 1].Title, @Model.Books[i + 1].Author</p>
+                </div>
+            }
         </div>
 
-        @if (i + 1 < Model.Books.Count)
-        {
-            <div class="t2-book-container">
-                <a><img class="t2-book-cover" src="@Model.Books[i+1].CoverPhotoUrl" /> </a>
-                <p>@Model.Books[i + 1].Title, @Model.Books[i + 1].Author</p>
-            </div>
-        }
-    </div>
-        
     }
 
 </div>
+<script type="text/javascript">
+    function closePanel() {
+        var infoPanel = document.getElementById("info-panel");
+        infoPanel.style["opacity"] = "0";
+        infoPanel.style["transform"] = "translateX(-100%)";
+    }
+</script>
+<script type="text/javascript">
+    function openPanel() {
+        var infoPanel = document.getElementById("info-panel");
+        infoPanel.style["opacity"] = "1";
+        infoPanel.style["transform"] = "translateX(0%)";
+    }
+</script>

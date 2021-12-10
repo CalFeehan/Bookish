@@ -11,6 +11,8 @@ namespace Bookish.MVCWeb.Models
         public CheckoutModel(List<Checkout> checkouts)
         {
             Checkouts = checkouts;
+            Books = new List<Book>();
+
             foreach (Checkout checkout in Checkouts)
             {
                 Books.Add(BookRepo.GetBookByID(checkout.BookId));

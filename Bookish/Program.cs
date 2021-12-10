@@ -14,7 +14,7 @@ namespace Bookish.ConsoleApp
                 Console.WriteLine(new string('*', 20));
             }
 
-             BookRepo.AddBook("The Elements of Style", " William Strunk Jr.,  E. B. White,  William Strunk", "020530902X", "http://covers.openlibrary.org/b/id/6716028-M.jpg");
+            // BookRepo.AddBook("The Elements of Style", " William Strunk Jr.,  E. B. White,  William Strunk", "020530902X", "http://covers.openlibrary.org/b/id/6716028-M.jpg");
 
             foreach (Book book in BookRepo.GetAllBooks())
             {
@@ -36,7 +36,16 @@ namespace Bookish.ConsoleApp
             }
 
             // Run CSV import
-            // Utility.AddCSVLineToBookDatabase(Utility.ExtractFromCSV(@"C:\Users\User\Desktop\amended_books.csv", true));
+            // CSVReader.AddCSVLineToBookDatabase(CSVReader.ExtractFromCSV(@"C:\Users\User\Desktop\amended_books.csv", true));
+
+            // Checkout first 10 books
+            //for (int i = 7; i < 30; i++)
+            //{ CheckoutRepo.AddCheckout("callum.feehan@iris.co.uk", i); }
+
+            //foreach (Checkout checkout in CheckoutRepo.GetUserCheckouts("callum.feehan@iris.co.uk"))
+            //{
+            //    Console.WriteLine(checkout);
+            //}
 
         }
     }

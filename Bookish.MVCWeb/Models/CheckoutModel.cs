@@ -13,7 +13,7 @@ namespace Bookish.MVCWeb.Models
             Checkouts = checkouts;
             foreach (Checkout checkout in Checkouts)
             {
-                Books.Add(BookRepo.GetBookByID(checkout.BookId));
+                //Books.Add(BookRepo.GetBookByID(checkout.BookId));
             }
         }
     }

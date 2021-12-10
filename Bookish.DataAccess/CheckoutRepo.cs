@@ -35,6 +35,7 @@ namespace Bookish.DataAccess
         {
             List<Checkout> checkouts = DatabaseObject.ExecuteGetQuery<Checkout>($"SELECT * FROM Checkouts WHERE BookId={bookId}");
             return checkouts.Select(x => x.DueDate).ToList();
+        }
   
         public static bool RemoveCheckout(string username, int bookId)
         {

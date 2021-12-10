@@ -34,7 +34,7 @@ namespace Bookish.DataAccess
         public static bool RemoveCheckout(string username, int bookId)
         {
             SqlConnection db = DatabaseObject.GetDbConnection();
-            bool isCheckedOut = ((List<Checkout>)db.Query<Checkout>($"SELECT * FROM Checkouts WHERE UserName=\'{username}\' AND BookId=\'{bookId}\'")).Count == 1;
+            bool isCheckedOut = ((List<Checkout>)db.Query<Checkout>($"SELECT * FROM Checkouts WHERE UserName=\'{username}\' AND BookId=\'{bookId}\'")).Count >= 1;
             bool success = false;
             if(isCheckedOut)
             {

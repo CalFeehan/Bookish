@@ -7,6 +7,7 @@ namespace Bookish.ConsoleApp
     {
         static void Main(string[] args)
         {
+            CSVReader.ProcessComplexCSV(@"C:\Users\Danny.Flahive\Downloads\books.csv");
             foreach (User user in UserRepo.GetAllUsers())
             {
                 Console.WriteLine(new string('*', 20));
@@ -37,7 +38,7 @@ namespace Bookish.ConsoleApp
 
             // Run CSV import
             // Utility.AddCSVLineToBookDatabase(Utility.ExtractFromCSV(@"C:\Users\User\Desktop\amended_books.csv", true));
-
+            // CSVReader.ProcessComplexCSV(@"C:\Users\Danny.Flahive\Downloads\books.csv");
         }
     }
 }

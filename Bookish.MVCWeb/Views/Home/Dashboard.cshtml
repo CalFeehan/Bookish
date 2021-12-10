@@ -9,13 +9,33 @@
     <link href="~/css/dashboard.css" rel="stylesheet" />
 }
 
-<div>
-    
-    DASHBOARD CONTENT
-    @*@foreach (var item in Model.Checkouts)
-    {
-        <p>@item.ToString()</p>
+<div class="t2-dashboard-container">
+    <img class="background" src="/assets/background3.jpg" />
+    <div class="t2-search-container">
+        <form>
+            <input class="t2-search-bar" type="text" placeholder="Author" />
+            <input class="t2-search-bar" type="text" placeholder="Title" />
+            <button class="t2-search-button" type="submit" />
+        </form>
+    </div>
 
-    }*@
+    @for (int i = 0; i < Model.Books.Count; i += 2)
+    {
+    <div class="t2-book-row">
+        <div class="t2-book-container">
+            <a><img class="t2-book-cover" src="@Model.Books[i].CoverPhotoUrl" /> </a>
+            <p>@Model.Books[i].Title, @Model.Books[i].Author</p>
+        </div>
+
+        @if (i + 1 < Model.Books.Count)
+        {
+            <div class="t2-book-container">
+                <a><img class="t2-book-cover" src="@Model.Books[i+1].CoverPhotoUrl" /> </a>
+                <p>@Model.Books[i + 1].Title, @Model.Books[i + 1].Author</p>
+            </div>
+        }
+    </div>
+        
+    }
 
 </div>

@@ -1,12 +1,66 @@
-* {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+*{
+    color: rgb(255,255,255);
 }
 
-.t2-page-container {
+.background {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    top: 0px;
+    left: 0px;
+}
+
+.t2-dashboard-container {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.t2-search-container {
+    height: 75px;
+    padding: 20px;
+}
+
+.t2-search-bar {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 25vw;
+    height: 30px;
+    padding: 5px;
+}
+
+.t2-search-button {
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+}
+
+.t2-book-row {
     display: flex;
     flex-direction: row;
 }
 
+.t2-book-container {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    max-height: 250px;
+    margin: 20px;
+    overflow: hidden;
+}
 
+.t2-book-cover {
+    width: 150px;
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    .t2-book-row {
+        display: flex;
+        flex-direction: column;
+    }
+    .t2-book-container{
+        width: 90%;
+    }
+}

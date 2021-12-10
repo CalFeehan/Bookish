@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Bookish.MVCWeb</title>
     @RenderSection("Stylesheets")
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="t2-page-container">
 
         <div class="t2-navbar">
-            <a asp-area="Identity" asp-page="/Account/Manage/Index"><img class="t2-nav-button" src="~/assets/user.png"/></a>
-            <a href="@Url.Action("Dashboard", "Home")"><img class="t2-nav-button" src="~/assets/home.png" /></a>
-            <a><img class="t2-nav-button" src="~/assets/book.png" /></a>
-            <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"><img class="t2-nav-button" src="~/assets/logout.png" /></a>
+            <a class="t2-nav-button" asp-area="Identity" asp-page="/Account/Manage/Index"><img class="t2-nav-image" src="~/assets/user.png"/><p class="t2-nav-text">Profile</p></a>
+            <a class="t2-nav-button" href="@Url.Action("Dashboard", "Home")"><img class="t2-nav-image" src="~/assets/home.png" /><p class="t2-nav-text">Home</p></a>
+            <a class="t2-nav-button"><img class="t2-nav-image" src="~/assets/book.png" /><p class="t2-nav-text">Catalogue</p></a>
+            <a class="t2-nav-button" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"><img class="t2-nav-image" src="~/assets/logout.png" /><p class="t2-nav-text">Logout</p></a>
         </div>
 
         <div class="main-content-container">

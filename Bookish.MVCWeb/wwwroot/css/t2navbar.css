@@ -1,4 +1,10 @@
-﻿* {
+﻿:root {
+    --dark-grey: #232F34;
+    --light-grey: #eeeeee;
+    --yellow: #F9AA33;
+}
+
+* {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
@@ -6,8 +12,8 @@
 }
 
 .t2-page-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 200px 1fr;
 }
 
 .t2-navbar {
@@ -15,7 +21,7 @@
     min-width: 200px;
     max-width: 200px;
     height: 90vh;
-    background: #232F34;
+    background: var(--dark-grey);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -52,5 +58,24 @@
 .t2-nav-text {
     padding: 0px 20px 0px 20px;
     align-self: center;
-    color: #F9AA33;
+    color: var(--yellow);
+}
+
+@media only screen and (max-width: 60rem) {
+    .t2-page-container {
+        grid-template-columns: 100px 1fr;
+    }
+    
+    .t2-navbar {
+        min-width: 75px;
+        max-width: 75px;
+    }
+
+    .t2-nav-button{
+        transform: translateX(-15%);
+    }
+
+    .t2-nav-text{
+        display: none;
+    }
 }

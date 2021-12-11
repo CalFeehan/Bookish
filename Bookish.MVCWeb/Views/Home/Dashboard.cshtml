@@ -9,17 +9,34 @@
     <link href="~/css/dashboard.css" rel="stylesheet" />
 }
 
-
-@{bool infoPanelStatus = false;}
-@{string className = infoPanelStatus ? "t2-book-info-panel-active" : "";}
-<div class="t2-book-info-panel @className" id="info-panel">
+<div class="t2-book-info-panel" id="info-panel">
     <div class="t2-book-info-panel-top">
         <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
     </div>
+    <div class="t2-book-info-panel-bottom">
+        <div class="history-header">Checkout History:</div>
+
+        @{for (int i = 0; i < 3; i++) // loop through first 3 checkouts, replace text with vars
+            {
+                <div class="history-grid">
+                    <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
+                    <div class="history-info-card">
+                        <div class="history-info-card-top">
+                            <div class="book-origin">Callum</div>
+                            <div class="arrow-icon"> -> </div>
+                            <div class="book-destination">Checked Out</div>
+                        </div>
+                        <div class="exchange-date-time">11th December 10:10am</div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
 </div>
+
 <div class="t2-dashboard-container">
 
-    <img class="background" @*src="/assets/background3.jpg"*@/> 
+    <img class="background" />
     <div class="t2-search-container">
         <form>
             <input class="t2-search-bar" type="text" placeholder="Author" />
@@ -28,26 +45,19 @@
         </form>
     </div>
 
-    @for (int i = 0; i < Model.Books.Count; i += 2)
-    {
-        <div class="t2-book-row">
+    <div class="t2-book-grid">
+        @for (int i = 0; i < Model.Books.Count; i++)
+        {
             <div class="t2-book-container" onclick="openPanel()">
                 <a><img class="t2-book-cover" src="@Model.Books[i].CoverPhotoUrl" /> </a>
                 <p>@Model.Books[i].Title, @Model.Books[i].Author</p>
             </div>
-
-            @if (i + 1 < Model.Books.Count)
-            {
-                <div class="t2-book-container" onclick="openPanel()">
-                    <a><img class="t2-book-cover" src="@Model.Books[i+1].CoverPhotoUrl" /> </a>
-                    <p>@Model.Books[i + 1].Title, @Model.Books[i + 1].Author</p>
-                </div>
-            }
-        </div>
-
-    }
+        }
+    </div>
 
 </div>
+
+
 <script type="text/javascript">
     function closePanel() {
         var infoPanel = document.getElementById("info-panel");

@@ -37,10 +37,15 @@ namespace Bookish.MVCWeb.Controllers
             return View(new BookModel(BookRepo.GetAllBooks()));
         }
 
-        public IActionResult Dashboard()
+        public IActionResult Dashboard(string title, string author)
         {
-            CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
-            return View(checkoutModel);
+            if (!string.IsNullOrEmpty(title)) return View();
+
+
+            else if (!string.IsNullOrEmpty(author)) return View();
+
+
+            return View(new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name)));
         }
 
         public IActionResult Privacy()

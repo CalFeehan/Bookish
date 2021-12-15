@@ -1,0 +1,47 @@
+﻿@model Bookish.MVCWeb.Models.BookModel
+
+@{
+    ViewData["Title"] = "Catalogue";
+}
+
+@section Stylesheets {
+    <link href="~/css/t2navbar.css" rel="stylesheet" />
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+}
+
+<div class="t2-dashboard-container">
+
+    <img class="background" />
+    <div class="t2-search-container">
+        <form action="/Home/Catalogue" method="post">
+            <input class="t2-search-bar" type="text" placeholder="Author" name="author" />
+            <input class="t2-search-bar" type="text" placeholder="Title" name="title" />
+            <button class="t2-search-button" type="submit"><img src="~/assets/search.png"></button>
+        </form>
+    </div>
+
+    <div class="t2-book-grid">
+        @for (int i = 0; i < Model.Books.Count; i++)
+        {
+            <div class="t2-book-container" onclick="openPanel()">
+                <a><img class="t2-book-cover" src="@Model.Books[i].CoverPhotoUrl" /> </a>
+                <p>@Model.Books[i].Title, @Model.Books[i].Author</p>
+            </div>
+        }
+    </div>
+
+</div>
+
+@*<h1>Catalogue</h1>
+
+<div>
+    <h4>BookModel</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+*@

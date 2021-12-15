@@ -45,6 +45,26 @@ namespace Bookish.MVCWeb.Controllers
             return View(checkoutModel);
         }
 
+        public IActionResult Catalogue(string title, string author)
+        {
+            BookModel model = new BookModel(BookRepo.GetAllBooks());
+
+            if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(author))
+            {
+                model.FilterBooks(title, author);
+            }
+            else if (!string.IsNullOrEmpty(title))
+            {
+                model.FilterBooks(Enum.CHECKOUTMETHOD.BYNAME, title.ToLower());
+            }
+            else if (!string.IsNullOrEmpty(author))
+            {
+                model.FilterBooks(Enum.CHECKOUTMETHOD.BYAUTHOR, author.ToLower());
+            }
+
+            return View(model);
+        }
+
         public IActionResult Privacy()
         {
             return View();

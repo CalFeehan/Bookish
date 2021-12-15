@@ -1,5 +1,11 @@
+:root {
+    --dark-grey: #232F34;
+    --light-grey: #eeeeee;
+    --yellow: #F9AA33;
+}
+
 * {
-    color: #232F34;
+    color: var(--dark-grey);
 }
 
 .background {
@@ -9,11 +15,62 @@
     z-index: -1;
     top: 0px;
     left: 0px;
-    background: rgb(220 220 220);
+    background: var(--light-grey);
 }
 
+.t2-dashboard-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+/*---------------------Dashboard Main Screen---------------------*/
+
+.t2-search-container {
+    height: 75px;
+    padding: 20px 0px 0px 20px;    
+}
+
+.t2-search-bar {
+    border: 1px solid var(--light-grey);
+    border-radius: 0.5rem;
+    width: 25vw;
+    height: 2rem;
+    padding: 0.5rem;
+}
+
+.t2-search-button {
+    height: 2rem;
+    width: 2rem;
+    margin-left: 10px;
+    border: 1px solid var(--dark-grey);
+}
+
+.t2-book-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 2rem;
+}
+
+.t2-book-container {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    max-height: 30rem;
+    max-width: 20rem;
+    margin: 2rem;
+    overflow: hidden;
+}
+
+.t2-book-cover {
+    height: 25rem;
+}
+
+/*---------------------Info Panel---------------------*/
+/*--------Top--------*/
 .t2-book-info-panel {
-    background: #232F34;
+    background: var(--dark-grey);
     position: fixed;
     top: 0;
     left: 0;
@@ -28,12 +85,8 @@
     flex-direction: column;
 }
 
-.t2-book-info-panel-active {
-    transform: translateX(0%);
-    opacity: 1;
-}
-
 .t2-book-info-panel-top {
+    height: 50%;
     display: flex;
     justify-content: flex-end;
 }
@@ -51,58 +104,64 @@
     width: 50px;
 }
 
-.t2-dashboard-container {
-    height: 100vh;
-    overflow-y: scroll;
+/*--------Bottom--------*/
+.t2-book-info-panel-bottom {
+    pointer-events: none;
 }
-
-.t2-search-container {
-    height: 75px;
-    padding: 20px 0px 0px 20px;    
+.history-header {
+    color: var(--yellow);
+    height: 1rem;
+    margin: 0.5rem;
 }
-
-.t2-search-bar {
-    border: 1px solid #232F34;
-    border-radius: 5px;
-    width: 25vw;
-    height: 30px;
-    padding: 5px;
+.history-grid {
+    display: grid;
+    grid-template-columns: 50px 1fr;
 }
-
-.t2-search-button {
-    height: 30px;
-    width: 30px;
-    margin-left: 10px;
-    border: 1px solid #232F34;
+.profile-picture {
+    width: 100%;
+    border: 2px solid var(--light-grey);
+    border-radius: 100%;
+    margin: 0.5rem;
 }
-
-.t2-book-row {
+.history-info-card {
+    width: 90%;
+    background-color: var(--light-grey);
+    margin: 0.5rem;
+    margin-left: 1rem;
+    border-radius: 0.5rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
-
-.t2-book-container {
-    cursor: pointer;
+.history-info-card-top {
+    font-weight: 600;
+    margin: 0.5rem;
     display: flex;
-    flex-direction: row;
-    width: 50%;
-    max-height: 250px;
-    margin: 20px;
-    overflow: hidden;
+    gap: 0.5rem;
+}
+.book-origin {
+}
+.arrow-icon {
+}
+.book-destination {
+}
+.exchange-date-time {
+    margin: 0.5rem;
 }
 
-.t2-book-cover {
-    width: 150px;
-    margin-right: 10px;
-}
-
-@media only screen and (max-width: 800px) {
-    .t2-book-row {
-        display: flex;
-        flex-direction: column;
-    }
-    .t2-book-container{
-        width: 90%;
+/*---------------------Media Screen Settings---------------------*/
+@media only screen and (max-width: 80rem) {
+    .t2-book-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
+@media only screen and (max-width: 60rem) {
+    .t2-book-grid {
+        grid-template-columns: 1fr;
+        margin-left: 0px;
+    }
+
+    .t2-book-info-panel {
+        width: 100%;
+    }
+}

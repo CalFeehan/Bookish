@@ -20,27 +20,23 @@ namespace Bookish.MVCWeb.Controllers
         {
             if (User.Identity.IsAuthenticated) { return Redirect("/Home/Dashboard"); }
 
-
             if (!string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Author))
             {
                 var booksByTitle = BookRepo.GetBooksByTitle(Title);
                 var booksByAuthor = BookRepo.GetBooksByAuthor(Author);
                 var bookSelection = booksByAuthor.Intersect(booksByTitle).ToList();
-                BookModel bookModel = new BookModel(bookSelection);
-                return View(bookModel);
+                return View(new BookModel(bookSelection));
             }
             else if(!string.IsNullOrEmpty(Title))
             {
                 var books = BookRepo.GetBooksByTitle(Title);
-                BookModel bookModel = new BookModel(books);
-                return View(bookModel);
+                return View(new BookModel(books));
 
             }
             else if (!string.IsNullOrEmpty(Author))
             {
                 var books = BookRepo.GetBooksByAuthor(Author);
-                BookModel bookModel = new BookModel(books);
-                return View(bookModel);
+                return View(new BookModel(books));
             }
 
             return View(new BookModel(BookRepo.GetAllBooks()));

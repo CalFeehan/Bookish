@@ -8,9 +8,9 @@ namespace Bookish.DataAccess
         // SELECT
         public static List<Book> GetAllBooks() => DatabaseObject.ExecuteGetQuery<Book>("SELECT * FROM Books");
 
-        public static List<Book> GetBooksByAuthor(string author) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Author=\'{author}\'");
+        public static List<Book> GetBooksByAuthor(string author) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Author LIKE \'%{author}%\'");
 
-        public static List<Book> GetBooksByTitle(string title) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Title=\'{title}\'");
+        public static List<Book> GetBooksByTitle(string title) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE Title LIKE \'%{title}%\'");
 
         public static Book GetBookByID(int bookId) => DatabaseObject.ExecuteGetQuery<Book>($"SELECT * FROM Books WHERE BookId={bookId}")[0];
 

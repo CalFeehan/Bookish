@@ -42,14 +42,14 @@ namespace Bookish.MVCWeb.Controllers
             CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
             
             if (!string.IsNullOrEmpty(title)) {
-                checkoutModel.Books = checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYNAME, title);
+                checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYNAME, title);
                 return View(checkoutModel);
             } 
 
 
             else if (!string.IsNullOrEmpty(author))
             {
-                checkoutModel.Books = checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYAUTHOR, author);
+                checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYAUTHOR, author);
                 return View(checkoutModel);
             }
 

@@ -8,7 +8,7 @@ namespace Bookish.MVCWeb.Models
     public class CheckoutModel
     {
         public List<Checkout> Checkouts { get; }
-        public List<Book> Books { get; set; }
+        public List<Book> Books { get; private set; }
 
         public CheckoutModel(List<Checkout> checkouts)
         {
@@ -20,11 +20,10 @@ namespace Bookish.MVCWeb.Models
             }
         }
         //Searches Books member variable for a given book. If method is not specified, return all checked out books
-        public List<Book> FindBook(Enum.CHECKOUTMETHOD method, string searchString)
+        public void FindBook(Enum.CHECKOUTMETHOD method, string searchString)
         {
-            if(method == Enum.CHECKOUTMETHOD.BYNAME) return Books.Where(x => x.Title.Contains(searchString)).ToList();
-            if (method == Enum.CHECKOUTMETHOD.BYAUTHOR) return Books.Where(x => x.Author.Contains(searchString)).ToList();
-            else return Books;
+            if(method == Enum.CHECKOUTMETHOD.BYNAME) Books =  Books.Where(x => x.Title.Contains(searchString)).ToList();
+            if (method == Enum.CHECKOUTMETHOD.BYAUTHOR) Books = Books.Where(x => x.Author.Contains(searchString)).ToList();
         }
     }
 }

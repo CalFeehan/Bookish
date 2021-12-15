@@ -3,7 +3,7 @@ using Bookish.MVCWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using System.Linq;
+using Bookish.DataAccess.Enums;
 
 namespace Bookish.MVCWeb.Controllers
 {
@@ -39,13 +39,22 @@ namespace Bookish.MVCWeb.Controllers
 
         public IActionResult Dashboard(string title, string author)
         {
-            if (!string.IsNullOrEmpty(title)) return View();
+            CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
+            
+            if (!string.IsNullOrEmpty(title)) {
+                checkoutModel.Books = checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYNAME, title);
+                return View(checkoutModel);
+            } 
 
 
-            else if (!string.IsNullOrEmpty(author)) return View();
+            else if (!string.IsNullOrEmpty(author))
+            {
+                checkoutModel.Books = checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYAUTHOR, author);
+                return View(checkoutModel);
+            }
 
 
-            return View(new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name)));
+            return View(checkoutModel);
         }
 
         public IActionResult Privacy()

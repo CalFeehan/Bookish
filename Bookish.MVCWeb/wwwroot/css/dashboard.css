@@ -35,6 +35,10 @@
     padding: 20px 0px 0px 20px;
 }
 
+.t2-search-container img {
+    width: 40px;
+}
+
 .t2-search-bar {
     border: 1px solid var(--light-grey);
     border-radius: 0.5rem;
@@ -47,7 +51,8 @@
     height: 2rem;
     width: 2rem;
     margin-left: 10px;
-    border: 1px solid var(--dark-grey);
+    border: none;
+    cursor: pointer;
 }
 
 .t2-book-grid {

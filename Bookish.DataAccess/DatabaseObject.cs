@@ -10,22 +10,22 @@ namespace Bookish.DataAccess
 {
     class DatabaseObject
     {
-        public static List<T> ExecuteGetQuery<T>(string query)
+        public static List<T> ExecuteGetQuery<T>(string query, object param = null)
         {
             IDbConnection db = GetDbConnection();
 
-            List<T> ret = db.Query<T>(query).ToList();
+            List<T> ret = db.Query<T>(query, param).ToList();
             
             db.Close();
             
             return ret;
         }
 
-        public static void ExecutePostQuery(string query)
+        public static void ExecutePostQuery(string query, object param = null)
         {
             IDbConnection db = GetDbConnection();
 
-            db.Query(query);
+            db.Query(query, param);
 
             db.Close();
         }

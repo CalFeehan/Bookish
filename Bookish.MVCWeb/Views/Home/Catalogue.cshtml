@@ -9,6 +9,31 @@
     <link href="~/css/dashboard.css" rel="stylesheet" />
 }
 
+<div class="t2-book-info-panel" id="info-panel">
+    <div class="t2-book-info-panel-top">
+        <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
+    </div>
+    <div class="t2-book-info-panel-bottom">
+        <div class="history-header">Checkout History:</div>
+
+        @{for (int i = 0; i < 3; i++) // loop through first 3 checkouts, replace text with vars
+            {
+                <div class="history-grid">
+                    <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
+                    <div class="history-info-card">
+                        <div class="history-info-card-top">
+                            <div class="book-origin">Callum</div>
+                            <div class="arrow-icon"> -> </div>
+                            <div class="book-destination">Checked Out</div>
+                        </div>
+                        <div class="exchange-date-time">11th December 10:10am</div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
 <div class="t2-dashboard-container">
 
     <img class="background" />
@@ -32,16 +57,18 @@
 
 </div>
 
-@*<h1>Catalogue</h1>
 
-<div>
-    <h4>BookModel</h4>
-    <hr />
-    <dl class="row">
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
-*@
+<script type="text/javascript">
+    function closePanel() {
+        var infoPanel = document.getElementById("info-panel");
+        infoPanel.style["opacity"] = "0";
+        infoPanel.style["transform"] = "translateX(-100%)";
+    }
+</script>
+<script type="text/javascript">
+    function openPanel() {
+        var infoPanel = document.getElementById("info-panel");
+        infoPanel.style["opacity"] = "1";
+        infoPanel.style["transform"] = "translateX(0%)";
+    }
+</script>

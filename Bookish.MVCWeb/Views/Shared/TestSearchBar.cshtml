@@ -1,15 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
-
-<p>Use this page to detail your site's privacy policy.</p>
-<div class="t2-dashboard-container">
+﻿<div class="t2-dashboard-container">
     <img class="background" src="/assets/background3.jpg" />
     <div class="t2-dashboard-container">
         <img class="background" src="/assets/background3.jpg" />
         <div class="t2-search-container">
-            @Html.BeginForm("Dashboard", "Home", FormMethod.Post)
+            @Html.BeginForm("Dashboard", "Home", FormMethod.Get)
             <form action="Index">
                 <input class="t2-search-bar" type="text" placeholder="Author" name="Author" />
                 <input class="t2-search-bar" type="text" placeholder="Title" name="Title" />

@@ -3,6 +3,8 @@ using Bookish.MVCWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Bookish.DataAccess.Enums;
+using System.Linq;
 
 namespace Bookish.MVCWeb.Controllers
 {
@@ -14,17 +16,54 @@ namespace Bookish.MVCWeb.Controllers
         {
             _logger = logger;
         }
-
-        public IActionResult Index()
+        public IActionResult Index(string Title, string Author)
         {
             if (User.Identity.IsAuthenticated) { return Redirect("/Home/Dashboard"); }
-            BookModel bookModel = new BookModel(BookRepo.GetAllBooks());
-            return View(bookModel);
+
+            if (!string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Author))
+            {
+                var booksByTitle = BookRepo.GetBooksByTitle(Title);
+                var booksByAuthor = BookRepo.GetBooksByAuthor(Author);
+                var bookSelection = booksByAuthor.Intersect(booksByTitle).ToList();
+                return View(new BookModel(bookSelection));
+            }
+            else if(!string.IsNullOrEmpty(Title))
+            {
+                var books = BookRepo.GetBooksByTitle(Title);
+                return View(new BookModel(books));
+
+            }
+            else if (!string.IsNullOrEmpty(Author))
+            {
+                var books = BookRepo.GetBooksByAuthor(Author);
+                return View(new BookModel(books));
+            }
+
+            return View(new BookModel(BookRepo.GetAllBooks()));
         }
 
-        public IActionResult Dashboard()
+        public IActionResult Dashboard(string title, string author)
         {
             CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
+
+
+
+            if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(author))
+            {
+                checkoutModel.FindBook(title, author);
+            }
+
+            else if (!string.IsNullOrEmpty(title)) {
+                checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYNAME, title);
+            } 
+
+
+            else if (!string.IsNullOrEmpty(author))
+            {
+                checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYAUTHOR, author);
+            }
+
+
             return View(checkoutModel);
         }
 
@@ -32,11 +71,13 @@ namespace Bookish.MVCWeb.Controllers
         {
             return View();
         }
+        
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+           return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

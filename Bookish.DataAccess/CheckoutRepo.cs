@@ -13,6 +13,8 @@ namespace Bookish.DataAccess
 
         public static List<Checkout> GetUserCheckouts(string UserName) => DatabaseObject.ExecuteGetQuery<Checkout>($"SELECT * FROM Checkouts WHERE UserName=\'{UserName}\'");
 
+        public static List<Checkout> GetBookCheckouts(int bookId) => DatabaseObject.ExecuteGetQuery<Checkout>($"SELECT * FROM Checkouts WHERE BookId=\'{bookId}\'");
+
         public static bool AddCheckout(string username, int bookId)
         {
             SqlConnection db = DatabaseObject.GetDbConnection();

@@ -14,5 +14,11 @@ namespace Bookish.DataAccess
 
         public override string ToString() => $"BookId: {BookId}, Title: {Title}, Author: {Author}, NumberOfCopies: {NumberOfCopies}, NumberOfCopiesAvailable: {NumberOfCopiesAvailable}.";
 
+        public override bool Equals(object obj)
+        {
+            var other = obj as Book;
+            return BookId.Equals(other.BookId);
+        }
+
     }
 }

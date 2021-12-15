@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Bookish.DataAccess.Enums;
+using System.Linq;
 
 namespace Bookish.MVCWeb.Controllers
 {
@@ -20,7 +21,15 @@ namespace Bookish.MVCWeb.Controllers
             if (User.Identity.IsAuthenticated) { return Redirect("/Home/Dashboard"); }
 
 
-            if(!string.IsNullOrEmpty(Title))
+            if (!string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Author))
+            {
+                var booksByTitle = BookRepo.GetBooksByTitle(Title);
+                var booksByAuthor = BookRepo.GetBooksByAuthor(Author);
+                var bookSelection = booksByAuthor.Intersect(booksByTitle).ToList();
+                BookModel bookModel = new BookModel(bookSelection);
+                return View(bookModel);
+            }
+            else if(!string.IsNullOrEmpty(Title))
             {
                 var books = BookRepo.GetBooksByTitle(Title);
                 BookModel bookModel = new BookModel(books);

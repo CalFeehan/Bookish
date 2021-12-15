@@ -19,6 +19,10 @@ namespace Bookish.DataAccess
             var other = obj as Book;
             return BookId.Equals(other.BookId);
         }
+        public override int GetHashCode()
+        {
+            return this.BookId;      
+        }
 
     }
 }

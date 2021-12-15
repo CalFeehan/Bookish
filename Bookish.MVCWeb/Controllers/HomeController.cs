@@ -45,17 +45,22 @@ namespace Bookish.MVCWeb.Controllers
         public IActionResult Dashboard(string title, string author)
         {
             CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
-            
-            if (!string.IsNullOrEmpty(title)) {
+
+
+
+            if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(author))
+            {
+                checkoutModel.FindBook(title, author);
+            }
+
+            else if (!string.IsNullOrEmpty(title)) {
                 checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYNAME, title);
-                return View(checkoutModel);
             } 
 
 
             else if (!string.IsNullOrEmpty(author))
             {
                 checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYAUTHOR, author);
-                return View(checkoutModel);
             }
 
 

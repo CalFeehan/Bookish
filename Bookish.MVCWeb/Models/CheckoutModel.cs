@@ -19,11 +19,16 @@ namespace Bookish.MVCWeb.Models
                 Books.Add(BookRepo.GetBookByID(checkout.BookId));
             }
         }
-        //Searches Books member variable for a given book. If method is not specified, return all checked out books
         public void FindBook(Enum.CHECKOUTMETHOD method, string searchString)
         {
             if(method == Enum.CHECKOUTMETHOD.BYNAME) Books =  Books.Where(x => x.Title.Contains(searchString)).ToList();
             if (method == Enum.CHECKOUTMETHOD.BYAUTHOR) Books = Books.Where(x => x.Author.Contains(searchString)).ToList();
+        }
+        public void FindBook(string author, string title)
+        {
+            var list1 = Books.Where(x => x.Title.ToUpper().Contains(author.ToUpper())).ToList();
+            var list2 = Books.Where(x => x.Author.ToUpper().Contains(title.ToUpper())).ToList();
+            Books = list1.Intersect(list2).ToList();
         }
     }
 }

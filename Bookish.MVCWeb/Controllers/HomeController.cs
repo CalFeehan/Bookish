@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Bookish.DataAccess.Enums;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Bookish.MVCWeb.Controllers
 {
@@ -72,7 +73,10 @@ namespace Bookish.MVCWeb.Controllers
             return View();
         }
         
-       
+        public IActionResult GetCheckoutInfo(int bookId)
+        {
+            return PartialView(new BookDetailsModel(BookRepo.GetBookByID(bookId)));
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

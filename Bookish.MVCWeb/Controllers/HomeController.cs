@@ -17,53 +17,30 @@ namespace Bookish.MVCWeb.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index(string Title, string Author)
+        public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated) { return Redirect("/Home/Dashboard"); }
 
-            if (!string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Author))
-            {
-                var booksByTitle = BookRepo.GetBooksByTitle(Title);
-                var booksByAuthor = BookRepo.GetBooksByAuthor(Author);
-                var bookSelection = booksByAuthor.Intersect(booksByTitle).ToList();
-                return View(new BookModel(bookSelection));
-            }
-            else if(!string.IsNullOrEmpty(Title))
-            {
-                var books = BookRepo.GetBooksByTitle(Title);
-                return View(new BookModel(books));
-
-            }
-            else if (!string.IsNullOrEmpty(Author))
-            {
-                var books = BookRepo.GetBooksByAuthor(Author);
-                return View(new BookModel(books));
-            }
-
-            return View(new BookModel(BookRepo.GetAllBooks()));
+            return View();
         }
 
         public IActionResult Dashboard(string title, string author)
         {
             CheckoutModel checkoutModel = new CheckoutModel(CheckoutRepo.GetUserCheckouts(User.Identity.Name));
 
-
-
             if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(author))
             {
-                checkoutModel.FindBook(title, author);
+                checkoutModel.FilterBooks(title.ToLower(), author.ToLower());
             }
 
             else if (!string.IsNullOrEmpty(title)) {
-                checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYNAME, title);
+                checkoutModel.FilterBooks(Enum.CHECKOUTMETHOD.BYNAME, title.ToLower());
             } 
-
 
             else if (!string.IsNullOrEmpty(author))
             {
-                checkoutModel.FindBook(Enum.CHECKOUTMETHOD.BYAUTHOR, author);
+                checkoutModel.FilterBooks(Enum.CHECKOUTMETHOD.BYAUTHOR, author.ToLower());
             }
-
 
             return View(checkoutModel);
         }

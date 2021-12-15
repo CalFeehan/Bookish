@@ -20,12 +20,12 @@ namespace Bookish.MVCWeb.Models
                 Books.Add(BookRepo.GetBookByID(checkout.BookId));
             }
         }
-        public void FindBook(Enum.CHECKOUTMETHOD method, string searchString)
+        public void FilterBooks(Enum.CHECKOUTMETHOD method, string searchString)
         {
-            if(method == Enum.CHECKOUTMETHOD.BYNAME) Books =  Books.Where(x => x.Title.Contains(searchString)).ToList();
-            if (method == Enum.CHECKOUTMETHOD.BYAUTHOR) Books = Books.Where(x => x.Author.Contains(searchString)).ToList();
+            if(method == Enum.CHECKOUTMETHOD.BYNAME) Books =  Books.Where(x => x.Title.ToLower().Contains(searchString)).ToList();
+            if (method == Enum.CHECKOUTMETHOD.BYAUTHOR) Books = Books.Where(x => x.Author.ToLower().Contains(searchString)).ToList();
         }
-        public void FindBook(string author, string title)
+        public void FilterBooks(string author, string title)
         {
             var list1 = Books.Where(x => x.Title.ToUpper().Contains(author.ToUpper())).ToList();
             var list2 = Books.Where(x => x.Author.ToUpper().Contains(title.ToUpper())).ToList();

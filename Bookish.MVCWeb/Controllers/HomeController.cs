@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Bookish.DataAccess.Enums;
 using System.Linq;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Bookish.MVCWeb.Controllers
 {
@@ -70,9 +71,12 @@ namespace Bookish.MVCWeb.Controllers
             return View();
         }
         
-        public IActionResult GetCheckoutInfo(int bookId)
+        [HttpPost]
+        public object GetCheckoutInfo()
         {
-            return PartialView(new BookDetailsModel(BookRepo.GetBookByID(bookId)));
+            int bookId = int.Parse(Request.Form["bookId"]);
+            var bookDetails = new BookDetailsModel(BookRepo.GetBookByID(bookId));
+            return bookDetails;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

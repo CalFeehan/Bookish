@@ -10,7 +10,7 @@ namespace Bookish.MVCWeb.Models
 
         public BookDetailsModel(Book book)
         {
-            Checkouts = CheckoutRepo.GetBookCheckouts(Book.BookId);
+            Checkouts = CheckoutRepo.GetBookCheckouts(book.BookId);
             Book = book;
         }
     }

@@ -26,7 +26,7 @@ namespace Bookish.DataAccess
                 DateTime dueDate = DateTime.Now.AddDays(10);
                 //string dueDateStr = dueDate.Year.ToString() + dueDate.Month.ToString() + dueDate.Day.ToString();
                 string dueDateStr = dueDate.ToString("yyyy, MM, dd");
-                db.Query($"INSERT INTO Checkouts VALUES (@username, @bookId, @dueDateStr)", new { username, bookId, dueDateStr });
+                db.Query($"INSERT INTO Checkouts VALUES (@username, @bookId, @dueDate)", new { username, bookId, dueDate });
                 db.Query($"UPDATE Books SET NumberOfCopiesAvailable = NumberOfCopiesAvailable - 1 FROM Books WHERE BookId=@bookId", new { bookId });
                 success = true;
             }

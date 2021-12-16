@@ -37,10 +37,17 @@ namespace Bookish.ConsoleApp
 
             // Run CSV import
             // CSVReader.AddCSVLineToBookDatabase(CSVReader.ExtractFromCSV(@"C:\Users\User\Desktop\amended_books.csv", true));
-
-            // Checkout first 10 books
+           
+            // Checkout first 23 books
             //for (int i = 7; i < 30; i++)
             //{ CheckoutRepo.AddCheckout("callum.feehan@iris.co.uk", i); }
+
+            // CheckoutRepo.AddCheckout("test@test.com", 1);
+            //CheckoutRepo.AddCheckout("danny.flahive@iris.co.uk", 1);
+            //CheckoutRepo.AddCheckout("danny.flahive@iris.co.uk", 8);
+            //CheckoutRepo.AddCheckout("ian.nkwocha@iris.co.uk", 1);
+            //CheckoutRepo.AddCheckout("ian.nkwocha@iris.co.uk", 9);
+            //CheckoutRepo.AddCheckout("callum.feehan@iris.co.uk", 1);
 
             //foreach (Checkout checkout in CheckoutRepo.GetUserCheckouts("callum.feehan@iris.co.uk"))
             //{

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bookish.DataAccess;
 
 namespace Bookish.MVCWeb
 {
@@ -30,6 +31,7 @@ namespace Bookish.MVCWeb
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            DatabaseObject.connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)

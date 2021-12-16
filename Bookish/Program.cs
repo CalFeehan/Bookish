@@ -1,5 +1,6 @@
 ﻿using Bookish.DataAccess;
 using System;
+using System.Configuration;
 
 namespace Bookish.ConsoleApp
 {
@@ -7,6 +8,9 @@ namespace Bookish.ConsoleApp
     {
         static void Main(string[] args)
         {
+
+            DatabaseObject.connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
             foreach (User user in UserRepo.GetAllUsers())
             {
                 Console.WriteLine(new string('*', 20));

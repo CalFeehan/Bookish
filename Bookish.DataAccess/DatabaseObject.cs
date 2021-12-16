@@ -8,8 +8,9 @@ using System.Linq;
 
 namespace Bookish.DataAccess
 {
-    class DatabaseObject
+    public class DatabaseObject
     {
+        public static string connectionString;
         public static List<T> ExecuteGetQuery<T>(string query, object param = null)
         {
             IDbConnection db = GetDbConnection();
@@ -32,7 +33,7 @@ namespace Bookish.DataAccess
 
         public static SqlConnection GetDbConnection()
         {
-            return new SqlConnection("Server=localhost;Database=bookish;Trusted_Connection=True;MultipleActiveResultSets=true");
+            return new SqlConnection(connectionString);
         }
     }
 }

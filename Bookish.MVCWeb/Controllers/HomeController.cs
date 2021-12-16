@@ -90,5 +90,11 @@ namespace Bookish.MVCWeb.Controllers
             CheckoutRepo.RemoveCheckout(User.Identity.Name, bookId);
             return Redirect("/Home/Dashboard");
         }
+
+        public IActionResult Checkout(int bookId)
+        {
+            CheckoutRepo.AddCheckout(User.Identity.Name, bookId);
+            return Redirect("/Home/Dashboard");
+        }
     }
 }

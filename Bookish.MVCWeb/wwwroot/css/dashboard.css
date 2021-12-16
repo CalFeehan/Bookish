@@ -28,6 +28,7 @@
 
 .t2-search-container form{
     display: flex;
+    gap: 1rem;
 }
 
 .t2-search-container {
@@ -99,9 +100,18 @@
     display:flex;
     flex-direction:column;
     color:white;
+    padding: 0rem 1rem 0rem 1rem;
 }
-.t2-book-info-panel-top h1,h2,h3{
-    color:var(--yellow)
+
+.t2-panel-header {
+    color: var(--light-grey);
+    font-size: 1.5rem;
+}
+
+.t2-book-info-panel-top p {
+    color: var(--yellow);
+    font-size: 1rem;
+    gap: 0.5rem;
 }
 
 .t2-book-info-panel-button {
@@ -111,10 +121,24 @@
     width: 50px;
     margin: 15px;
     cursor: pointer;
+    display: flex;
+    align-self: flex-end;
 }
 
 .t2-book-info-panel-close {
     width: 50px;
+}
+
+.t2-return-button{
+    width: 100px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.t2-checkout-button {
+    width: 100px;
+    height: 25px;
+    cursor: pointer;
 }
 
 /*--------Bottom--------*/

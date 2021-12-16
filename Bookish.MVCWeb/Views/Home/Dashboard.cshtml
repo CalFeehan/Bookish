@@ -14,9 +14,12 @@
         <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
         <!--Available copies info-->
         <div class="t2-text-container">
-            <h1 id="text-title">Title:</h1>
-            <h2 id="text-author">Author:</h2>
-            <h2 id="text-copies">Copies Available:</h2>
+            <div class="t2-panel-header">Title: <p id="text-title"></p></div>
+            <br/>
+            <div class="t2-panel-header">Author: <p id="text-author"></p></div>
+            <br />
+            <div class="t2-panel-header">Copies Available: <p id="text-copies">Copies Available: </p></div>
+            <br />
         </div>
         <form method="Post" action="/Home/Return">
             <button class="t2-return-button">Return</button>
@@ -93,16 +96,15 @@
             url: '/Home/GetCheckoutInfo'
         })
             .done(function (data) {
+                document.getElementById(`history-grid${0}`).style["visibility"] = "hidden";
+                document.getElementById(`history-grid${1}`).style["visibility"] = "hidden";
+                document.getElementById(`history-grid${2}`).style["visibility"] = "hidden";
                 if (data) {
-                    console.log(data.book);
-                    $(`#text-title`).text("Title: " + data.book.title);
-                    $(`#text-author`).text("Author: " + data.book.author);
-                    $(`#text-copies`).text("Copies Available: " + data.book.numberOfCopiesAvailable);
+                    $(`#text-title`).text(data.book.title);
+                    $(`#text-author`).text(data.book.author);
+                    $(`#text-copies`).text(data.book.numberOfCopiesAvailable);
                     for (let i = 0; i < data.checkouts.length && i < 3; i++) {
                         $(`#book-origin${i}`).text(data.checkouts[i].userName);
-                        var dueDate = data.checkouts[i].dueDate
-                        console.log(dueDate)
-                        var readable_date = new Date(dueDate).toDateString();
                         $(`#checkout-time${i}`).text(new Date(data.checkouts[i].dueDate).toDateString());
                         var historyGrid = document.getElementById(`history-grid${i}`);
                         historyGrid.style["visibility"] = "visible";

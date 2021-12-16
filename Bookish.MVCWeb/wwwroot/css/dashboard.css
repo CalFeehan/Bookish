@@ -96,8 +96,12 @@
 
 .t2-book-info-panel-top {
     height: 50%;
-    display: flex;
-    justify-content: flex-end;
+    display:flex;
+    flex-direction:column;
+    color:white;
+}
+.t2-book-info-panel-top h1,h2,h3{
+    color:var(--yellow)
 }
 
 .t2-book-info-panel-button {

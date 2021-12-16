@@ -12,7 +12,16 @@
 <div class="t2-book-info-panel" id="info-panel">
     <div class="t2-book-info-panel-top">
         <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
+        <!--Available copies info-->
+        <div class="t2-text-container">
+            <h1 id="text-title">Title:</h1>
+            <h2 id="text-author">Author:</h2>
+            <h2 id="text-copies">Copies Available:</h2>
+        </div>
+        <button class="t2-return-button">Return</button>
+
     </div>
+
     <div class="t2-book-info-panel-bottom">
         <div class="history-header">Checkout History:</div>
 
@@ -22,17 +31,17 @@
                 string checkoutTime = $"checkout-time{i}";
                 string historyGrid = $"history-grid{i}";
 
-<div class="history-grid" id=@historyGrid style="visibility: hidden">
-    <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
-    <div class="history-info-card">
-        <div class="history-info-card-top">
-            <div class="book-origin" id=@bookOrigin>Callum</div>
-            <div class="book-destination">Due Back:</div>
-        </div>
-        <div class="exchange-date-time" id=@checkoutTime>11th December 10:10am</div>
-    </div>
-</div>
-}
+                <div class="history-grid" id=@historyGrid style="visibility: hidden">
+                    <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
+                    <div class="history-info-card">
+                        <div class="history-info-card-top">
+                            <div class="book-origin" id=@bookOrigin>Callum</div>
+                            <div class="book-destination">Due Back:</div>
+                        </div>
+                        <div class="exchange-date-time" id=@checkoutTime>11th December 10:10am</div>
+                    </div>
+                </div>
+           }
         }
     </div>
 </div>
@@ -82,6 +91,10 @@
         })
             .done(function (data) {
                 if (data) {
+                    console.log(data.book);
+                    $(`#text-title`).text("Title: " + data.book.title);
+                    $(`#text-author`).text("Author: " + data.book.author);
+                    $(`#text-copies`).text("Copies Available: " + data.book.numberOfCopiesAvailable);
                     for (let i = 0; i < data.checkouts.length && i < 3; i++) {
                         $(`#book-origin${i}`).text(data.checkouts[i].userName);
                         var dueDate = data.checkouts[i].dueDate

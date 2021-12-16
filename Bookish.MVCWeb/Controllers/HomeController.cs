@@ -84,5 +84,11 @@ namespace Bookish.MVCWeb.Controllers
         {
            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Return(int bookId)
+        {
+            CheckoutRepo.RemoveCheckout(User.Identity.Name, bookId);
+            return Redirect("/Home/Dashboard");
+        }
     }
 }

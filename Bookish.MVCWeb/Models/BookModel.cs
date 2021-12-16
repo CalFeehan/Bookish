@@ -14,10 +14,10 @@ namespace Bookish.MVCWeb.Models
             Books = books;
         }
 
-        public void FilterBooks(string author, string title)
+        public void FilterBooks(string title, string author)
         {
-            var list1 = Books.Where(x => x.Title.ToUpper().Contains(author.ToUpper())).ToList();
-            var list2 = Books.Where(x => x.Author.ToUpper().Contains(title.ToUpper())).ToList();
+            var list1 = Books.Where(x => x.Title.ToUpper().Contains(title.ToUpper())).ToList();
+            var list2 = Books.Where(x => x.Author.ToUpper().Contains(author.ToUpper())).ToList();
             Books = list1.Intersect(list2).ToList();
         }
 
@@ -25,6 +25,11 @@ namespace Bookish.MVCWeb.Models
         {
             if (method == Enum.CHECKOUTMETHOD.BYNAME) Books = Books.Where(x => x.Title.ToLower().Contains(searchString.ToLower())).ToList();
             if (method == Enum.CHECKOUTMETHOD.BYAUTHOR) Books = Books.Where(x => x.Author.ToLower().Contains(searchString.ToLower())).ToList();
+        }
+
+        public List<Checkout> GetCheckout(int bookId)
+        {
+            return CheckoutRepo.GetBookCheckouts(bookId);
         }
     }
 }

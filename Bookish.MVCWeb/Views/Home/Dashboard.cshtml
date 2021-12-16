@@ -18,7 +18,10 @@
             <h2 id="text-author">Author:</h2>
             <h2 id="text-copies">Copies Available:</h2>
         </div>
-        <button class="t2-return-button">Return</button>
+        <form method="Post" action="/Home/Return">
+            <button class="t2-return-button">Return</button>
+            <input type ="hidden" name="bookId" id="bookId" value="" />
+        </form>
 
     </div>
 
@@ -104,7 +107,7 @@
                         var historyGrid = document.getElementById(`history-grid${i}`);
                         historyGrid.style["visibility"] = "visible";
                     }
-
+                    $(`#bookId`).val(data.book.bookId);
                     var infoPanel = document.getElementById("info-panel");
                     infoPanel.style["opacity"] = "1";
                     infoPanel.style["transform"] = "translateX(0%)";

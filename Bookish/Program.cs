@@ -35,12 +35,14 @@ namespace Bookish.ConsoleApp
                 Console.WriteLine(checkout);
             }
 
+            Console.WriteLine(BookRepo.GetBooksByAuthor("Will"));
+
             //Run CSV import
             //CSVReader.AddCSVLineToBookDatabase(CSVReader.ExtractFromCSV(@"C:\Users\Ian.Nkwocha\Downloads\amended_books.csv", true));
             //Checkout first 23 books
             //for (int i = 7; i < 30; i++)
             //{ CheckoutRepo.AddCheckout("callum.feehan@iris.co.uk", i); }
-            //
+
             //CheckoutRepo.AddCheckout("test@test.com", 1);
             //CheckoutRepo.AddCheckout("danny.flahive@iris.co.uk", 1);
             //CheckoutRepo.AddCheckout("danny.flahive@iris.co.uk", 8);
@@ -52,7 +54,7 @@ namespace Bookish.ConsoleApp
             //{
             //    Console.WriteLine(checkout);
             //}
-            
+
         }
     }
 }

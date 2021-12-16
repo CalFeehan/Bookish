@@ -12,24 +12,36 @@
 <div class="t2-book-info-panel" id="info-panel">
     <div class="t2-book-info-panel-top">
         <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
+        <!--Available copies info-->
+        <div class="t2-text-container">
+            <h1 id="text-title">Title:</h1>
+            <h2 id="text-author">Author:</h2>
+            <h2 id="text-copies">Copies Available:</h2>
+        </div>
+        <button class="t2-return-button">Return</button>
+
     </div>
+
     <div class="t2-book-info-panel-bottom">
         <div class="history-header">Checkout History:</div>
 
         @{for (int i = 0; i < 3; i++) // loop through first 3 checkouts, replace text with vars
-            {
-                <div class="history-grid">
+            {   // make below grids display="none" with id="historygrid{i}", change to display="block" in ajax
+                string bookOrigin = $"book-origin{i}";
+                string checkoutTime = $"checkout-time{i}";
+                string historyGrid = $"history-grid{i}";
+                
+                <div class="history-grid" id=@historyGrid style="visibility: hidden">
                     <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
                     <div class="history-info-card">
                         <div class="history-info-card-top">
-                            <div class="book-origin">Callum</div>
-                            <div class="arrow-icon"> -> </div>
-                            <div class="book-destination">Checked Out</div>
+                            <div class="book-origin" id=@bookOrigin>Callum</div>
+                            <div class="book-destination">Due Back:</div>
                         </div>
-                        <div class="exchange-date-time">11th December 10:10am</div>
+                        <div class="exchange-date-time" id=@checkoutTime>11th December 10:10am</div>
                     </div>
                 </div>
-            }
+           }
         }
     </div>
 </div>
@@ -48,12 +60,13 @@
     <div class="t2-book-grid">
         @for (int i = 0; i < Model.Books.Count; i++)
         {
-            <div class="t2-book-container" onclick="openPanel()">
+            <div class="t2-book-container" onclick="openPanel(this)" id="@Model.Books[i].BookId">
                 <a><img class="t2-book-cover" src="@Model.Books[i].CoverPhotoUrl" /> </a>
-                <p>@Model.Books[i].Title, @Model.Books[i].Author</p>
+                @Model.Books[i].Title, @Model.Books[i].Author
             </div>
         }
     </div>
+
 
 </div>
 
@@ -65,10 +78,37 @@
         infoPanel.style["transform"] = "translateX(-100%)";
     }
 </script>
+
 <script type="text/javascript">
-    function openPanel() {
-        var infoPanel = document.getElementById("info-panel");
-        infoPanel.style["opacity"] = "1";
-        infoPanel.style["transform"] = "translateX(0%)";
+    function openPanel(item) {
+
+        var itemId = $(item).attr("id");
+
+        $.ajax({
+            data: { bookId: itemId },
+            type: 'POST',
+            url: '/Home/GetCheckoutInfo'
+        })
+            .done(function (data) {
+                if (data) {
+                    console.log(data.book);
+                    $(`#text-title`).text("Title: " + data.book.title);
+                    $(`#text-author`).text("Author: " + data.book.author);
+                    $(`#text-copies`).text("Copies Available: " + data.book.numberOfCopiesAvailable);
+                    for (let i = 0; i < data.checkouts.length && i < 3; i++) {
+                        $(`#book-origin${i}`).text(data.checkouts[i].userName);
+                        var dueDate = data.checkouts[i].dueDate
+                        console.log(dueDate)
+                        var readable_date = new Date(dueDate).toDateString();
+                        $(`#checkout-time${i}`).text(new Date(data.checkouts[i].dueDate).toDateString());
+                        var historyGrid = document.getElementById(`history-grid${i}`);
+                        historyGrid.style["visibility"] = "visible";
+                    }
+
+                    var infoPanel = document.getElementById("info-panel");
+                    infoPanel.style["opacity"] = "1";
+                    infoPanel.style["transform"] = "translateX(0%)";
+                }
+            });
     }
 </script>

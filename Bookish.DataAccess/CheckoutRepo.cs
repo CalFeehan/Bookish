@@ -48,7 +48,7 @@ namespace Bookish.DataAccess
             if(isCheckedOut)
             {
                 db.Query($"DELETE FROM Checkouts WHERE UserName=@username AND BookId=@bookId", new { username, bookId });
-                db.Query($"UPDATE Books SET NumberOfCopiesAvailable = NumberOfCopiesAvailable - 1 FROM Books WHERE BookId=@bookId", new { bookId });
+                db.Query($"UPDATE Books SET NumberOfCopiesAvailable = NumberOfCopiesAvailable + 1 FROM Books WHERE BookId=@bookId", new { bookId });
                 success = true;
             }
             db.Close();

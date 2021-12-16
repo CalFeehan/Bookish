@@ -351,3 +351,4 @@ MigrationBackup/
 
 # App configurations 
 Bookish/App.config
+Bookish.MVCWeb/appsettings.Development.json

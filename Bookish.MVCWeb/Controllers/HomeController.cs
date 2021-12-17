@@ -66,6 +66,11 @@ namespace Bookish.MVCWeb.Controllers
             return View(model);
         }
 
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -95,6 +100,11 @@ namespace Bookish.MVCWeb.Controllers
         {
             CheckoutRepo.AddCheckout(User.Identity.Name, bookId);
             return Redirect("/Home/Dashboard");
+        }
+
+        public IActionResult SendAddBookRequest()
+        {
+            return View();
         }
     }
 }

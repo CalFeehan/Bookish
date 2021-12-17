@@ -28,6 +28,7 @@
 
 .t2-search-container form{
     display: flex;
+    gap: 1rem;
 }
 
 .t2-search-container {
@@ -96,8 +97,21 @@
 
 .t2-book-info-panel-top {
     height: 50%;
-    display: flex;
-    justify-content: flex-end;
+    display:flex;
+    flex-direction:column;
+    color:white;
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+.t2-panel-header {
+    color: var(--light-grey);
+    font-size: 1.5rem;
+}
+
+.t2-book-info-panel-top p {
+    color: var(--yellow);
+    font-size: 1rem;
+    gap: 0.5rem;
 }
 
 .t2-book-info-panel-button {
@@ -107,10 +121,37 @@
     width: 50px;
     margin: 15px;
     cursor: pointer;
+    display: flex;
+    align-self: flex-end;
 }
 
 .t2-book-info-panel-close {
     width: 50px;
+}
+
+.t2-return-button, .t2-checkout-button {
+    width: 100px;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 700;
+    background: var(--dark-grey);
+    color: var(--light-grey);
+    border: 2px solid var(--light-grey);
+}
+
+.t2-return-button:hover {
+    border: 2px solid var(--light-grey);
+    background: var(--light-grey);
+    color: var(--dark-grey);
+    transition: 0.3s ease;
+}
+
+.t2-checkout-button:hover {
+    border: 2px solid var(--light-grey);
+    background: var(--light-grey);
+    color: var(--dark-grey);
+    transition: 0.3s ease;
 }
 
 /*--------Bottom--------*/

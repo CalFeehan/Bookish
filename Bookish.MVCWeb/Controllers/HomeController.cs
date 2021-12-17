@@ -66,6 +66,11 @@ namespace Bookish.MVCWeb.Controllers
             return View(model);
         }
 
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -83,6 +88,23 @@ namespace Bookish.MVCWeb.Controllers
         public IActionResult Error()
         {
            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Return(int bookId)
+        {
+            CheckoutRepo.RemoveCheckout(User.Identity.Name, bookId);
+            return Redirect("/Home/Dashboard");
+        }
+
+        public IActionResult Checkout(int bookId)
+        {
+            CheckoutRepo.AddCheckout(User.Identity.Name, bookId);
+            return Redirect("/Home/Dashboard");
+        }
+
+        public IActionResult SendAddBookRequest()
+        {
+            return View();
         }
     }
 }

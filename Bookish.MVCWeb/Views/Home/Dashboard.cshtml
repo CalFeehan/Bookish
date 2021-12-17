@@ -12,7 +12,22 @@
 <div class="t2-book-info-panel" id="info-panel">
     <div class="t2-book-info-panel-top">
         <button class="t2-book-info-panel-button" onClick="closePanel()"><img class="t2-book-info-panel-close" src="~/assets/close.png" /></button>
+        <!--Available copies info-->
+        <div class="t2-text-container">
+            <div class="t2-panel-header">Title: <p id="text-title"></p></div>
+            <br/>
+            <div class="t2-panel-header">Author: <p id="text-author"></p></div>
+            <br />
+            <div class="t2-panel-header">Copies Available: <p id="text-copies">Copies Available: </p></div>
+            <br />
+        </div>
+        <form method="Post" action="/Home/Return">
+            <button class="t2-return-button">Return</button>
+            <input type ="hidden" name="bookId" id="bookId" value="" />
+        </form>
+
     </div>
+
     <div class="t2-book-info-panel-bottom">
         <div class="history-header">Checkout History:</div>
 
@@ -22,17 +37,17 @@
                 string checkoutTime = $"checkout-time{i}";
                 string historyGrid = $"history-grid{i}";
 
-<div class="history-grid" id=@historyGrid style="visibility: hidden">
-    <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
-    <div class="history-info-card">
-        <div class="history-info-card-top">
-            <div class="book-origin" id=@bookOrigin>Callum</div>
-            <div class="book-destination">Due Back:</div>
-        </div>
-        <div class="exchange-date-time" id=@checkoutTime>11th December 10:10am</div>
-    </div>
-</div>
-}
+                <div class="history-grid" id=@historyGrid style="visibility: hidden">
+                    <img class="profile-picture" src="https://source.unsplash.com/WNoLnJo7tS8" />
+                    <div class="history-info-card">
+                        <div class="history-info-card-top">
+                            <div class="book-origin" id=@bookOrigin>Callum</div>
+                            <div class="book-destination">Due Back:</div>
+                        </div>
+                        <div class="exchange-date-time" id=@checkoutTime>11th December 10:10am</div>
+                    </div>
+                </div>
+           }
         }
     </div>
 </div>
@@ -81,17 +96,20 @@
             url: '/Home/GetCheckoutInfo'
         })
             .done(function (data) {
+                document.getElementById(`history-grid${0}`).style["visibility"] = "hidden";
+                document.getElementById(`history-grid${1}`).style["visibility"] = "hidden";
+                document.getElementById(`history-grid${2}`).style["visibility"] = "hidden";
                 if (data) {
+                    $(`#text-title`).text(data.book.title);
+                    $(`#text-author`).text(data.book.author);
+                    $(`#text-copies`).text(data.book.numberOfCopiesAvailable);
                     for (let i = 0; i < data.checkouts.length && i < 3; i++) {
                         $(`#book-origin${i}`).text(data.checkouts[i].userName);
-                        var dueDate = data.checkouts[i].dueDate
-                        console.log(dueDate)
-                        var readable_date = new Date(dueDate).toDateString();
                         $(`#checkout-time${i}`).text(new Date(data.checkouts[i].dueDate).toDateString());
                         var historyGrid = document.getElementById(`history-grid${i}`);
                         historyGrid.style["visibility"] = "visible";
                     }
-
+                    $(`#bookId`).val(data.book.bookId);
                     var infoPanel = document.getElementById("info-panel");
                     infoPanel.style["opacity"] = "1";
                     infoPanel.style["transform"] = "translateX(0%)";

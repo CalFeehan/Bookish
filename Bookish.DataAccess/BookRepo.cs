@@ -19,7 +19,7 @@ namespace Bookish.DataAccess
         // INSERT
         private static void AddNewBook(string title, string author, string ISBN, string CoverPhotoUrl)
         {
-            DatabaseObject.ExecuteGetQuery<Book>($"INSERT INTO Books VALUES (@title, @author, {1}, {1}, @ISBN, CoverPhotoUrl)", new { title, author, ISBN, CoverPhotoUrl });
+            DatabaseObject.ExecuteGetQuery<Book>($"INSERT INTO Books VALUES (@title, @author, {1}, {1}, @ISBN, @CoverPhotoUrl)", new { title, author, ISBN, CoverPhotoUrl });
         }
 
         private static void AddCopyOfExistingBook(string ISBN)
